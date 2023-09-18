@@ -7,6 +7,7 @@ import (
 	// "io"
 
 	echo "github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"gorm.io/gorm"
 )
 
@@ -31,6 +32,7 @@ func connect(c echo.Context) error {
 func main() {
 
 	e := echo.New()
+	e.Use(middleware.CORS())
 	e.GET("/", connect)
 	
 	// routing
