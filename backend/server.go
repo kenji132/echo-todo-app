@@ -3,16 +3,12 @@ package main
 import (
 	"myapp/model"
 	"net/http"
-	// "os"
-	// "io"
 
 	echo "github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"gorm.io/gorm"
 )
 
 type Todo struct{
-	gorm.Model
 	ID int64 `json:"id"`
 	Title string `json:"title"`
 	Content string `json:"content"`
@@ -42,7 +38,7 @@ func main() {
 	e.PUT("/todos/:id", updateTodo)
 	e.DELETE("/todos/:id", deleteTodo)
 
-	// 最後に書く
+	// log
 	e.Logger.Fatal(e.Start(":1323"))
 }
 
