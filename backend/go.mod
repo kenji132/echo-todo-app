@@ -1,4 +1,4 @@
-module myapp
+module backend
 
 go 1.20
 

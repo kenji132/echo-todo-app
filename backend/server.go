@@ -1,7 +1,8 @@
 package main
 
 import (
-	"myapp/model"
+	"backend/db"
+	"backend/model"
 	"net/http"
 
 	echo "github.com/labstack/echo/v4"
@@ -15,7 +16,7 @@ type Todo struct{
 }
 
 func connect(c echo.Context) error {
-	db, _ := model.DB.DB()
+	db, _ := db.DB.DB()
 	defer db.Close()
 	err := db.Ping()
 	if err != nil {
@@ -44,14 +45,14 @@ func main() {
 
 func getAllTodos(c echo.Context) error {
 	todos := []model.Todo{}
-	model.DB.Find(&todos)
+	db.DB.Find(&todos)
 	return c.JSON(http.StatusOK, todos)
 }
 
 func getTodo(c echo.Context) error {
 	id := c.Param("id")
 	todos := model.Todo{}
-	model.DB.Find(&todos, id)
+	db.DB.Find(&todos, id)
 	return c.JSON(http.StatusOK, todos)
 }
 
@@ -60,25 +61,25 @@ func createTodo(c echo.Context) error {
 	if err := c.Bind(&todo); err != nil {
 		return err
 	}
-	model.DB.Create(&todo)
+	db.DB.Create(&todo)
 	return c.JSON(http.StatusOK, todo)
 }
 
 func updateTodo(c echo.Context) error {
 	id := c.Param("id")
 	todo := model.Todo{}
-	model.DB.Find(&todo, id)
+	db.DB.Find(&todo, id)
 	if err := c.Bind(&todo); err != nil {
 		return err
 	}
-	model.DB.Save(&todo)
+	db.DB.Save(&todo)
 	return c.JSON(http.StatusOK, todo)
 }
 
 func deleteTodo(c echo.Context) error {
 	id := c.Param("id")
 	todo := model.Todo{}
-	model.DB.Delete(&todo, id)
+	db.DB.Delete(&todo, id)
 	res := map[string]string{
 		"message": "削除が成功しました",
 		"deleted_id": id,
