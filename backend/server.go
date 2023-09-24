@@ -51,9 +51,9 @@ func getAllTodos(c echo.Context) error {
 
 func getTodo(c echo.Context) error {
 	id := c.Param("id")
-	todos := model.Todo{}
-	db.DB.Find(&todos, id)
-	return c.JSON(http.StatusOK, todos)
+	todo := model.Todo{}
+	db.DB.Find(&todo, id)
+	return c.JSON(http.StatusOK, todo)
 }
 
 func createTodo(c echo.Context) error {
