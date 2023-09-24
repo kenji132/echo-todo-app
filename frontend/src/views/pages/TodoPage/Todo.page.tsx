@@ -29,21 +29,20 @@ export const Todo = () => {
       });
   }, []);
 
-  if (todo == undefined) {
+  if (todo != undefined) {
     return (
       <>
-        <Text fontSize={"xl"}>Nothing</Text>
+        <Text fontSize={"xl"}>Todo show</Text>
+        <div key={todo.id}>
+          <Text fontSize={"xl"}>Title: {todo.title}</Text>
+          <Text fontSize={"xl"}>Content: {todo.content}</Text>
+        </div>
       </>
     );
   }
-
   return (
     <>
-      <Text fontSize={"xl"}>Todo show</Text>
-      <div key={todo.id}>
-        <Text fontSize={"xl"}>Title: {todo.title}</Text>
-        <Text fontSize={"xl"}>Content: {todo.content}</Text>
-      </div>
+      <Text fontSize={"xl"}>Todo not found.</Text>
     </>
   );
 };

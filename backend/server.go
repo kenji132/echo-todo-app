@@ -3,6 +3,7 @@ package main
 import (
 	"backend/db"
 	"backend/model"
+	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -52,7 +53,10 @@ func getAllTodos(c echo.Context) error {
 func getTodo(c echo.Context) error {
 	id := c.Param("id")
 	todo := model.Todo{}
-	db.DB.Find(&todo, id)
+	if db.DB.Find(&todo, id).RowsAffected == 0 {
+		fmt.Println("error detected! ErrRecordNotFound")
+		return nil
+	}
 	return c.JSON(http.StatusOK, todo)
 }
 
