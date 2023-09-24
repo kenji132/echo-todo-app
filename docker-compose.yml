@@ -1,0 +1,37 @@
+version: "3.8"
+services: 
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/dockerfile
+    ports:
+      - "1323:1323"
+    depends_on:
+      - db
+    tty: true
+  
+  frontend:
+    build:
+      context: .
+      dockerfile: ./frontend/dockerfile
+    extra_hosts:
+      - localhost:192.168.208.1 
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - /app/node_modules
+
+  db:
+    build:
+      context: .
+      dockerfile: ./db/dockerfile
+    environment:
+      - POSTGRES_HOST=localhost
+      - POSTGRES_DB=todoapp
+      - POSTGRES_USER=gorm
+      - POSTGRES_PASSWORD=password
+    ports:
+      - 5432:5432
+    restart: always
