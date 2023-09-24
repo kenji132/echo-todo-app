@@ -1,0 +1,17 @@
+FROM node:18.16.1-alpine
+
+WORKDIR /todo-app/frontend
+COPY ./frontend .
+
+RUN ls /todo-app/frontend
+
+ENV LANG C.UTF-8
+ENV TZ Asia/Tokyo
+
+RUN apk upgrade --update && apk --no-cache add git
+
+RUN yarn install
+
+EXPOSE 5173
+
+CMD ["yarn", "dev"]
