@@ -31,15 +31,14 @@ export const Todo = () => {
   }, []);
 
   if (todo != undefined) {
-    if (isOpen) {
-      return (
+    return (
+      <>
+        {isOpen ? (
         <>
           <h1>Update Form</h1>
           <Button onClick={() => setIsOpen(false)}>cancel</Button>
         </>
-      );
-    } else {
-      return (
+      ) : (
         <>
           <Text fontSize={"xl"}>Todo show</Text>
           <div key={todo.id}>
@@ -48,8 +47,9 @@ export const Todo = () => {
           </div>
           <Button onClick={() => setIsOpen(true)}>Edit Todo</Button>
         </>
-      );
-    }
+      )}
+      </>
+    )
   }
   return (
     <>
