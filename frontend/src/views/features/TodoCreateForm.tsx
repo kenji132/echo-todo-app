@@ -1,6 +1,7 @@
 import { AppEnv } from "@/constants/env";
 import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type FormData = {
   title: string;
@@ -12,6 +13,7 @@ export const TodoCreateForm = () => {
     title: "",
     content: "",
   });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ export const TodoCreateForm = () => {
       body: JSON.stringify(formData),
     });
     setFormData({ title: "", content: "" });
+    navigate("/todos");
   };
 
   const handleInputChange = (
@@ -46,7 +49,7 @@ export const TodoCreateForm = () => {
           value={formData.title}
           onChange={handleInputChange}
           required
-          />
+        />
       </FormControl>
       <FormControl mt={3}>
         <FormLabel>Content</FormLabel>
@@ -60,7 +63,7 @@ export const TodoCreateForm = () => {
         />
       </FormControl>
       <Button type="submit" mt={3} justifyContent={"center"}>
-        Create Todo
+        Create todo
       </Button>
     </form>
   );
