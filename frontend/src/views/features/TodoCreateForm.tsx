@@ -7,7 +7,7 @@ type FormData = {
   content: string;
 };
 
-export const TodoForm = () => {
+export const TodoCreateForm = () => {
   const [formData, setFormData] = useState<FormData>({
     title: "",
     content: "",

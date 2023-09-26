@@ -1,7 +1,7 @@
 import { AppEnv } from "@/constants/env";
 import { Todo } from "@/modules/todo/type";
 import { router } from "@/router";
-import { TodoForm } from "@/views/features/TodoForm";
+import { TodoCreateForm } from "@/views/features/TodoCreateForm";
 import { Button, Text, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -47,7 +47,7 @@ export const Todos = () => {
             </div>
           );
         })}
-        <TodoForm />
+        <TodoCreateForm />
       </VStack>
     </>
   );
