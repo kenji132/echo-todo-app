@@ -10,12 +10,6 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-type Todo struct{
-	ID int64 `json:"id"`
-	Title string `json:"title"`
-	Content string `json:"content"`
-}
-
 func connect(c echo.Context) error {
 	db, _ := db.DB.DB()
 	defer db.Close()
@@ -28,7 +22,6 @@ func connect(c echo.Context) error {
 }
 
 func main() {
-
 	e := echo.New()
 	e.Use(middleware.CORS())
 	e.GET("/", connect)
