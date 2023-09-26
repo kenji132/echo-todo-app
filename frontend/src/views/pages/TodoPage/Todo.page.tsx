@@ -1,9 +1,10 @@
 import { AppEnv } from "@/constants/env";
 import { Todo as TodoType } from "@/modules/todo/type";
+import { router } from "@/router";
 import { TodoUpdateForm } from "@/views/features/TodoUpdateForm";
-import { Text } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 type TodoPageParams = {
   id: string;
@@ -34,12 +35,18 @@ export const Todo = () => {
     return (
       <>
         <TodoUpdateForm {...todo} />
+        <Button>
+          <NavLink to={router.getPath("todos")}>Back to index</NavLink>
+        </Button>
       </>
     );
   }
   return (
     <>
       <Text fontSize={"xl"}>Todo not found.</Text>
+      <Button>
+        <NavLink to={router.getPath("todos")}>Back to index</NavLink>
+      </Button>
     </>
   );
 };
