@@ -62,7 +62,12 @@ export const TodoCreateForm = () => {
           required
         />
       </FormControl>
-      <Button type="submit" mt={3} justifyContent={"center"}>
+      <Button
+        type="submit"
+        mt={3}
+        justifyContent={"center"}
+        colorScheme="teal"
+      >
         Create todo
       </Button>
     </form>

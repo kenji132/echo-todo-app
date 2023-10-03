@@ -67,7 +67,9 @@ export const TodoUpdateForm = (props: PropsType) => {
                 required
               />
             </FormControl>
-            <Button type="submit">Update Todo</Button>
+            <Button type="submit" colorScheme="teal" variant={"outline"}>
+              Update Todo
+            </Button>
           </form>
           <Button onClick={() => setIsOpen(false)}>cancel</Button>
         </>
@@ -78,7 +80,13 @@ export const TodoUpdateForm = (props: PropsType) => {
             <Text fontSize={"xl"}>Title: {formData.title}</Text>
             <Text fontSize={"xl"}>Content: {formData.content}</Text>
           </div>
-          <Button onClick={() => setIsOpen(true)}>Edit Todo</Button>
+          <Button
+            onClick={() => setIsOpen(true)}
+            colorScheme="teal"
+            variant={"outline"}
+          >
+            Edit Todo
+          </Button>
         </>
       )}
     </>
