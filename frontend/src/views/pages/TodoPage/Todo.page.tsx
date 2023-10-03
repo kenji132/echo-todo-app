@@ -4,7 +4,7 @@ import { router } from "@/router";
 import { TodoUpdateForm } from "@/views/features/TodoUpdateForm";
 import { Button, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 type TodoPageParams = {
   id: string;
@@ -13,6 +13,7 @@ type TodoPageParams = {
 export const Todo = () => {
   const { id } = useParams<TodoPageParams>();
   const [todo, setTodo] = useState<TodoType>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${AppEnv.apiUrl}/todos/${id}`)
@@ -35,8 +36,12 @@ export const Todo = () => {
     return (
       <>
         <TodoUpdateForm {...todo} />
-        <Button>
-          <NavLink to={router.getPath("todos")}>Back to index</NavLink>
+        <Button
+          onClick={() => {
+            navigate(router.getPath("todos"));
+          }}
+        >
+          Back to index
         </Button>
       </>
     );
@@ -44,8 +49,12 @@ export const Todo = () => {
   return (
     <>
       <Text fontSize={"xl"}>Todo not found.</Text>
-      <Button>
-        <NavLink to={router.getPath("todos")}>Back to index</NavLink>
+      <Button
+        onClick={() => {
+          navigate(router.getPath("todos"));
+        }}
+      >
+        Back to index
       </Button>
     </>
   );

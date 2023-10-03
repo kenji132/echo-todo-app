@@ -4,10 +4,11 @@ import { router } from "@/router";
 import { TodoCreateForm } from "@/views/features/TodoCreateForm";
 import { Button, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Todos = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${AppEnv.apiUrl}/todos`)
@@ -33,10 +34,29 @@ export const Todos = () => {
             <div key={todo.id}>
               <Text fontSize={"xl"}>Title: {todo.title}</Text>
               <Text fontSize={"xl"}>Content: {todo.content}</Text>
-              <Button>
-                <NavLink to={router.getPath("todo", { id: todo.id })}>
-                  Go to show
-                </NavLink>
+              <Button
+                onClick={() => {
+                  navigate(router.getPath("todo", { id: todo.id }));
+                }}
+              >
+                Go to show
+              </Button>
+              <Button
+                onClick={() => {
+                  fetch(`${AppEnv.apiUrl}/todos/${todo.id}`, {
+                    method: "PUT",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      title: todo.title,
+                      content: todo.content,
+                      is_done: true,
+                    }),
+                  });
+                }}
+              >
+                complete
               </Button>
             </div>
           );
